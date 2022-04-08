@@ -17,3 +17,19 @@
 - **Re-identification attack**:
     - Public keys known to belong to some service are collected
     - Cluster keys based on shared spending authority, creating a graph, where nodes represent the user/service
+
+# Bitcoin Protocol
+
+- **A chain of transactions**
+- Owners are identified by public keys:
+    - ECDSA signature scheme
+    - Serves as a *pseudonym*
+    - Users can use any number of public keys
+- **Transaction**:
+    - The previous owner signs the hash of the transaction (in which he got the bitcoin) and the public key of the next owner
+    - In practice, SHA256 is used
+    - This signature is added to the set of transactions (that represent the coin itself)
+    - These transactions **reference the previous one** and form a **chain**
+    - To check the *validity*, each transaction can be checked in the chain
+- **Double spending**:
+    - Transfer bitcoin that was already transferred
