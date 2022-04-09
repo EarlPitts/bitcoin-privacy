@@ -101,6 +101,7 @@
 ## Heuristic 2
 
 - Focuses on change addresses
+- Much less robust
 - A common pattern of clients is to create a change address at each transaction, and never reuse it
 - By identifyin change addresses, not only the receiver, but also the input user can be clustered
 - Identifying change addresses:
@@ -109,3 +110,23 @@
     - Exception: coin generation
     - It's also possible to set the change address to the input address itself, so these are avoided as well
 - So the one-time change addresses are controlled by the same user as the input address
+- The major advantage of this heuristic is that we can **eliminate self-churn**:
+    - This way we can get a more accurate picture about how much bitcoin each user receives
+
+# Service Centrality
+
+- The centrality of services makes it difficult to stay anonymous, if you want to cash out into fiat money
+
+## Satoshi Dice
+
+- Gambling service
+- The gambled money is linked to the prize
+
+## Exchanges
+
+- Using an exchange is *almost unavoidable* for buying in or cashing out
+- There are sites where you can find local buyers or sellers, but not really scaleable
+- **Theft**:
+    - The address of the thief is known
+    - Exchanges usually refuse these addresses (and sometimes send back the money)
+    - Laundry services are pretty unreliable
