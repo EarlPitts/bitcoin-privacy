@@ -31,5 +31,41 @@
     - This signature is added to the set of transactions (that represent the coin itself)
     - These transactions **reference the previous one** and form a **chain**
     - To check the *validity*, each transaction can be checked in the chain
-- **Double spending**:
-    - Transfer bitcoin that was already transferred
+- **Double spending**: Transfer bitcoin that was already transferred
+- **Blocks**:
+    - Contains transactions
+    - Serves as a *timestamp*
+    - They are linked to form a *chain*, each referencing the previous block
+    - The **block chain** is pulicly available to every user
+- *Creation of coins*:
+    - Happens while blocks are created
+    - *Each block begins with a certain amount of zeroes*
+    - The block contains a *nonce*
+    - When this nonce is found, the block is broadcasted
+    - Only **21 million** coin can be generated in total
+    - Finding the nonce gives a reward of some BTC, which gets progressively lower
+
+## Bitcoin network
+
+- Each user generates one or more keypairs
+- The user makes their public key (also called **address**) publicly accessible
+- If the user wants to send bitcoins, they *broadcast a transaction* to peers
+- Peers propagate to other peers
+- Eventually it reaches a miner, who collects transactions into blocks, then finds the nonce
+- The miner also adds a **coin generation transaction**, specifying his address for the reward
+- The miner broadcasts the block, which propagates
+
+### Participants
+
+- Individuals generally don't attempt mining on their own:
+    - They join mining pools, that distributes the computation, and gives miners a franction of the reward
+- Most users avoid mining and buy coins from **exchanges** (using other currencies)
+- They keep bitcoins in their digital **wallet**, or they use **wallet services**
+- Bitcoin can be used to transact with online vendors
+
+### Statistics
+
+- Average block size: 1.27
+- Transactions per day: 264.000
+- Blockchain size: 400GB
+- Total number of transactions: 725.000
