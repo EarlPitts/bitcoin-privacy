@@ -74,7 +74,9 @@
 - In the early stages, there was only hoarding
 - Later most bitcoins were spent almost immediately
 
-# Clustering Heuristics
+# Deanonymizing
+
+## Clustering Heuristics
 
 - Unique addresses can be linked to a single entity
 - Two main heuristics:
@@ -92,13 +94,13 @@
     - *An address can only send as many times as it has already received*
     - *Bitcoins can be divided only by being spent*
 
-## Heuristic 1
+### Heuristic 1
 
 - If a transaction uses two or more public keys as input, they belong to the same entity
 - This effect is transitive:
     - If we have a transaction with A and B, and an other with B and C, then A, B and C all belong to the same entity
 
-## Heuristic 2
+### Heuristic 2
 
 - Focuses on change addresses
 - Much less robust
@@ -113,16 +115,16 @@
 - The major advantage of this heuristic is that we can **eliminate self-churn**:
     - This way we can get a more accurate picture about how much bitcoin each user receives
 
-# Service Centrality
+## Service Centrality
 
 - The centrality of services makes it difficult to stay anonymous, if you want to cash out into fiat money
 
-## Satoshi Dice
+### Satoshi Dice
 
 - Gambling service
 - The gambled money is linked to the prize
 
-## Exchanges
+### Exchanges
 
 - Using an exchange is *almost unavoidable* for buying in or cashing out
 - There are sites where you can find local buyers or sellers, but not really scaleable
@@ -140,6 +142,41 @@
     - If we follow the change addresses of these hops, we get the chain of this particular transaction
     - We also get the recipients by noting the other address (the "peel")
 
-# Mixing Services
+# Anonimity
 
-- Used for laundering coins
+- Identity:
+    - Who they pay
+    - Who pays them
+- Amounts:
+    - How much they pay
+    - How much they receive
+    - Patterns
+- Types:
+    - Weak: consistent pseudonym (reputation)
+    - Strong: no reputation
+
+## Blind Signature
+
+- The message is disguised (blinded) before it's signed
+- Typically used when the signer and the message author are different
+
+## Mixing Strategies
+
+- Can be used to launder coins
+
+### CoinJoin
+
+- Doesn't require the modification of the protocol
+- Common control is not required for transactions using multiple input addresses
+- Multiple users agree on a set of inputs to spend and a set out outputs to pay to
+- All participants has to sign for the transaction to be valid
+- The sources and destinations are obscured, transaction graph is obfuscated
+- A stronger variant has all the change outputs be the same amount
+- These are the most blockchain space efficient strategies
+
+
+# Solutions
+
+## ZeroLink
+
+- Offers protection agains privacy breach of user
