@@ -69,3 +69,43 @@
 - Transactions per day: 264.000
 - Blockchain size: 400GB
 - Total number of transactions: 725.000
+- Most bitcoin belongs to early "hoarders":
+    - These "sink" addresses never spent their coins (2013)
+- In the early stages, there was only hoarding
+- Later most bitcoins were spent almost immediately
+
+# Clustering Heuristics
+
+- Unique addresses can be linked to a single entity
+- Two main heuristics:
+    - Different public keys used for transaction from same entity are considered linked
+    - *Change addresses*:
+        - Exploits a use pattern, not an inherent vulnerability
+- **Account control**:
+    - The entity that controls the account
+    - It's not enough to know the private key:
+        - Services also know you private key, but they don't transact with it (hopefully)
+    - In case of wallet services, the entity that's responsible for forming transactions is the service provider itself
+- **Change address**:
+    - When you want to spend the value of a transaction you received before, you have to *spend all of it*
+    - The only way to send the fraction of a previous transaction is to use a *change address*, in which the excess is sent back to the sender
+    - *An address can only send as many times as it has already received*
+    - *Bitcoins can be divided only by being spent*
+
+## Heuristic 1
+
+- If a transaction uses two or more public keys as input, they belong to the same entity
+- This effect is transitive:
+    - If we have a transaction with A and B, and an other with B and C, then A, B and C all belong to the same entity
+
+## Heuristic 2
+
+- Focuses on change addresses
+- A common pattern of clients is to create a change address at each transaction, and never reuse it
+- By identifyin change addresses, not only the receiver, but also the input user can be clustered
+- Identifying change addresses:
+    - Assumption: they only have 1 input
+    - If the output of some transaction has a single address with only 1 input, then it's a change address
+    - Exception: coin generation
+    - It's also possible to set the change address to the input address itself, so these are avoided as well
+- So the one-time change addresses are controlled by the same user as the input address
