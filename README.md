@@ -126,7 +126,20 @@
 
 - Using an exchange is *almost unavoidable* for buying in or cashing out
 - There are sites where you can find local buyers or sellers, but not really scaleable
+- Exchanges are basically *checkpoints*, where users can be deanonimized (in response to e.g.: a subpoena)
 - **Theft**:
     - The address of the thief is known
     - Exchanges usually refuse these addresses (and sometimes send back the money)
     - Laundry services are pretty unreliable
+    - If the thieves are lacking in intelligence, we can easily follow the chain of transactions to an exchange
+- **Peeling chain**:
+    - A chain starts with a relatively large amount of coins
+    - At each transaction, a smaller amount is "peeled" off:
+        - One part is transferred to an other address
+        - One part is transferred to a one-time change address
+    - If we follow the change addresses of these hops, we get the chain of this particular transaction
+    - We also get the recipients by noting the other address (the "peel")
+
+# Mixing Services
+
+- Used for laundering coins
