@@ -158,7 +158,9 @@
 ## Blind Signature
 
 - The message is disguised (blinded) before it's signed
-- Typically used when the signer and the message author are different
+- The blinding can be removed while leaving the signature intact
+- The sender's privacy is preserved
+- When the signer verifies the unblinded signature, it will be unable to link the two messages together
 
 ## Mixing Strategies
 
@@ -174,9 +176,26 @@
 - A stronger variant has all the change outputs be the same amount
 - These are the most blockchain space efficient strategies
 
+### Chaumian CoinJoin
+
+- Additionally uses chaum blind signatures:
+    1. User provides input and *blinded* output
+    2. Mixer signs the *blinded* output
+    3. User unblinds the *signed blinded* output, and gives the server a *signed* output, with a new identity
+    4. Mixer verifies the signature and creates the CoinJoin transaction
 
 # Solutions
 
 ## ZeroLink
 
 - Offers protection agains privacy breach of user
+- The main parts are:
+    - Pre-mix wallet
+    - Post-mix wallet
+    - Mixing technique
+- Post-fix wallets have strong privacy requirements
+- The requirements together form the **Wallet Privacy Framework**
+- Coins are moved from one wallet to the other by mixing:
+    - Most on-chain techniques can be used for this
+    - ZeroLink has its own: **Chaumian CoinJoin**
+- Relies on Tor for anonymous communication with the mixing server
