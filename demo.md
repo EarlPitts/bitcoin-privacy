@@ -195,3 +195,164 @@ date:
     2. Mixer signs the *blinded* output
     3. User unblinds the *signed blinded* output, and gives the server a *signed* output, with a new identity
     4. Mixer verifies the signature and creates the CoinJoin transaction
+
+# New Method in Address Clustering
+
+## Motivation
+
+- Law enforcement
+- User privacy
+- Studying economic activity
+
+# Current Methods
+
+- The available techniques are sub-optimal in multiple ways
+- *multi-input* - widely used, moderately effective, easy to apply
+
+![multi-input heuristic example](./images/multi-input-example.png)
+
+# Issues
+
+- Lack of ground truth
+- Blockchaing inteklligence companies might posess refined data sets, but they are not publicly available
+- Clustering applied inconsistently accross studies
+
+# New Approach
+
+- Future transactions can reveal change outputs in past transactions
+- Changes in protocol and usage patterns showing the need to use multiple heuristics
+- Applying a random forest classifier
+- Naive clustering leads to cluster collapse
+
+# Building a Ground Truth Data Set
+
+## Core assumptions
+
+- 2 outputs - *standard* transaction - one of these outpus is a payment and the other receives the change
+- 1 outputs - not a good indicator - 
+- 2 or more outputs - less likely to originate from an ordinary wallet - (i. e. batch payout)
+
+# Building a Ground Truth Data Set
+
+![Core assumption example](./images/core-assumption-example.png)
+
+# Building a Ground Truth Data Set
+
+## Method
+
+- *multi-input* heuristic - later the change outputs are sometimes revealed due to address reuse
+
+![Change address reveal](./images/change-address-reveal.png)
+
+# Comparison to interactive collection
+
+## Interactive
+
+- Requires transactions from a variety of different use cases, entities and wallets
+- Would be hard to scale beyond a few hundred transactions
+- Cannot be done retroactively and is therefore limited to a short, current time frame
+
+## Non-interactive
+
+- Harder to verify the correctness
+- The assumption that one of the outputs belongs to the user may not hold
+- Can be biased towards entities and wallets that are more prone to reuse and merge addresses.
+
+# Data collection
+
+- Using the **BlockSci** open-source blockchain analysis framework
+- It is no longer actively developing
+- Blockchain parsed until June 2021 (block height 689 256)
+- Base clustering with multi-input heuristic (CoinJoin transactions excluded)
+
+# Data Refining
+
+- 1 output - 91 M
+- **2 output** - 495 M
+	1. 1.08 million transactions with unspent outputs
+	2. 0.97 million transactions where both outputs are in the same base cluster, violating the core assumption
+	3. 0.45 million transactions are in preexisting cluster collapse, which could create false positives
+	4. Already known change adresses (SatoshiDice, LuchkyB.it)
+- 3+ output - 67 M
+
+# Data Refining
+
+![Breakdown of different types of transactions](./images/transactions.png)
+
+# Predicting Change Outputs
+
+The Bitcoin protocol does not explicitly distinguish between change and spend outputs. However, wallets create change outputs automatically to return surplus value when users make payments.
+
+# Heuristic types
+
+1. *Universal heuristic* - use characteristics of the transaction and change output to determine the change
+2. *Fingerpring heuristic* -  determine change based on matching characteristics of the transactions spending the outputs.
+
+# Heuristics
+
+1. Optimal change - Only applies to transactions with 2+ inputs
+2. Address type - False positives
+3. Power of ten
+4. Shadow address - Not used here
+5. Consistent fingerprint - False positives
+
+# Observations regarding the heuristics
+
+1. The universal heuristics drop over time, likely due to rounded values becoming less common
+2. The consistetn fingerprint heuristics see a steady uptick in the number of correct votes due to increasing variety of protocol features available.
+3. Uptick in both correct and incorrect fingerprint votes starting in late 2017, when wallet implementations started to switch to SegWit
+
+# Observations regarding the heuristics
+
+![Average number of correct and uncorrect votes per transaction and type of heuristic in the ground truth data set, over time](./images/correct-and-uncorrect.png)
+
+# Threshold vote vs. Random forest
+
+- The previous figure suggest that a majority of heursitics should generally identify the correct output.
+- Number of heuristics returning potential output varies among transactions, and individual heuristics could be incorrect.
+- Threshold vote may not be reliable during different periods of Bitcoins's history.
+
+# Threshold vote vs. Random forest
+
+![](./images/threshold-vs-random.png)
+
+# Model validation
+
+- Locky and Cerber ransomware (99.6% accuracy)
+- GraphSense tagpack (97.6% accuracy)
+
+# Clustering Change Outputs
+
+1. Naive merging leads to cluster collapse
+	-  Graphsense tag pack - from 273 clusters 113 merged into a supercluster
+2. Constraints prevent cluster collapse
+	- In case of, two large exchanges whose users frequently interact with each other, a single misidentified change output could collapse their cluster.
+
+# Impact on Blockchain Analyses
+
+Address clustering is a common preprocessing step before analyzing activity of entities on the blockchain
+
+# Increased cashout flows from darknet markets to exchanges
+
+- The enhanced clustering was used to analyse payment flows from darknet markets to exchanges.
+- Relevant for cybercrime researchers, economists, regulators or law enforcement
+- It shows **13.8%** increase in bitcoin flows from the darknet markets to exchanges compared to the base clustering.
+
+# Improved estimate of velocity
+
+- The method was used to replicate the analysis of economic activity occuring on the Bitcoin blockchain
+- The clustering was used to remove self-payments of users which could inflate extimates.
+- It shows **11.9%** reduction in the estimates of bitcoins moved per day between January 2017 to June 2021
+
+# Comparison to the Meiklejohn (first paper) heuristic
+
+- The paper highlights the need for manual intervention to prevent cluster collapse, which is likely infeasible
+- The heuristic considers an output to be the change if its addres has only been used a singe time
+- The two estimation shows 4.1 million BTC, or USD 38.7 billion difference in economic activity
+
+# References
+
+1. Sarah Meiklejohn, Marjori Pomarole, Grant Jordan, Kirill Levchenko, Damon McCoy, Geoffrey M Voelker, and Stefan Savage. [“A fistful of bitcoins: characterizing payments among men with no names”](https://cseweb.ucsd.edu/~smeiklejohn/files/imc13.pdf) - https://cryptography.fandom.com/wiki/Blind_signature
+2. Malte Möser, Arvind Narayanan. ["Resurrecting Address Clustering in Bitcoin"](https://fc22.ifca.ai/preproceedings/87.pdf) - https://cryptography.fandom.com/wiki/Blind_signature
+3. [ZeroLink: The Bitcoin Fungibility Framework](https://github.com/nopara73/ZeroLink/blob/master/README.md) - https://github.com/nopara73/ZeroLink/blob/master/README.md
+4. [Blind signature](https://cryptography.fandom.com/wiki/Blind_signature) - https://cryptography.fandom.com/wiki/Blind_signature
