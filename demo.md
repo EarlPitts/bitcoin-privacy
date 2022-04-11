@@ -10,22 +10,28 @@ date:
 - April 11, 2022
 ---
 
-# Table of Content
+# Topics
 
 - Bitcoin protocol
 - Bitcoin network
 - Anonimity
 - Deanonimization
 - Evading deanonimization
-- Evading the evasion of deanonimization
+- TODO
 
 # Main Problems
 
-- Ovnership is anonymous, flow of money is not
+- Ownership is anonymous, flow of money is not:
+    - **Pseudo-anonimity**: all transactions are completely transparent
+    - As the block chain contains all of the transaction graph, it can be analyzed, searching for *patterns*
+- Vulnerable to re-identification attacks:
+    - Heuristic clustering to group based on shared characteristics
+    - Can be used to identify major institutions and the transactions between them
+    - Protecting against this would be a significant effort, lowering usability
 
 # Bitcoin Protocol
 
-- A bitcoint is a **chain of transactions**
+- A bitcoin is a **chain of transactions**
 - Owners are identified by **public keys**:
     - ECDSA signature scheme
     - Serves as a *pseudonym*
@@ -46,7 +52,7 @@ date:
 - Contains transactions
 - Serves as a *timestamp*
 - They are linked to form a *chain*, each referencing the previous block
-- The **block chain** is pulicly available to every user
+- The **block chain** is publicly available to every user
 
 ---
 
@@ -81,7 +87,7 @@ date:
 
 - Transactions per day: 264.000
 - Blockchain size: 400GB
-- Total number of transactions: 725.000
+- Total number of transactions: 725.000 million
 - Most bitcoin belongs to early "hoarders":
     - These "sink" addresses never spent their coins (2013)
 - In the early stages, there was only hoarding
@@ -145,7 +151,6 @@ date:
     - Assumption: they only have 1 input
     - If the output of some transaction has a single address with only 1 input, then it's a change address
     - Exception: coin generation
-    - It's also possible to set the change address to the input address itself, so these are avoided as well
 - So the one-time change addresses are controlled by the same user as the input address
 - The major advantage of this heuristic is that we can **eliminate self-churn**:
     - This way we can get a more accurate picture about how much bitcoin each user receives
@@ -153,9 +158,6 @@ date:
 # Service Centrality
 
 - The centrality of services makes it difficult to stay anonymous, if you want to cash out into fiat money
-
-# Exchanges
-
 - Using an exchange is *almost unavoidable* for buying in or cashing out
 - There are sites where you can find local buyers or sellers, but not really scaleable
 - Exchanges are basically *checkpoints*, where users can be deanonimized (in response to e.g.: a subpoena)
@@ -212,23 +214,13 @@ date:
     - Pre-mix wallet
     - Post-mix wallet
     - Mixing technique
-- Post-fix wallets have strong privacy requirements
+- Post-mix wallets have strong privacy requirements
 - The requirements together form the **Wallet Privacy Framework**
 - Coins are moved from one wallet to the other by mixing:
     - Most on-chain techniques can be used for this
     - ZeroLink has its own: **Chaumian CoinJoin**
 - Relies on Tor for anonymous communication with the mixing server
 - Implementation: Wasabi Wallet (2018)
-
----
-
-## Wallet Privacy Framework
-
-- A bunch of requirements that have to be fulfilled to provide anonimity
-- Pre-mix wallet:
-    - Can be any bitcoin wallet
-- Post-mix wallet:
-    - Strong privacy requirements
 
 # New Method in Address Clustering
 
