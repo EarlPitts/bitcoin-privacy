@@ -184,7 +184,7 @@ date:
 
 - Doesn't require the modification of the protocol
 - Common control is not required for transactions using multiple input addresses
-- Multiple users agree on a set of inputs to spend and a set out outputs to pay to
+- Multiple users agree on a set of inputs to spend and a set of outputs to pay to
 - All participants has to sign for the transaction to be valid
 - The sources and destinations are obscured, transaction graph is obfuscated
 - A stronger variant has all the change outputs be the same amount
