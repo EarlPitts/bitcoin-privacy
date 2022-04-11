@@ -5,7 +5,7 @@
 
 ---
 
-- Ovnership is anonymous, flow of money is not
+- Ownership is anonymous, flow of money is not
 - Vulnerable to re-identification attacks:
     - Heuristic clustering to group based on shared characteristics
     - Can be used to identify major institutions and the transactions between them
