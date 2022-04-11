@@ -10,6 +10,15 @@ date:
 - April 11, 2022
 ---
 
+# Table of Content
+
+- Bitcoin protocol
+- Bitcoin network
+- Anonimity
+- Deanonimization
+- Evading deanonimization
+- Evading the evasion of deanonimization
+
 # Main Problems
 
 - Ovnership is anonymous, flow of money is not
@@ -195,6 +204,31 @@ date:
     2. Mixer signs the *blinded* output
     3. User unblinds the *signed blinded* output, and gives the server a *signed* output, with a new identity
     4. Mixer verifies the signature and creates the CoinJoin transaction
+
+# ZeroLink
+
+- Offers protection agains privacy breach of user
+- The main parts are:
+    - Pre-mix wallet
+    - Post-mix wallet
+    - Mixing technique
+- Post-fix wallets have strong privacy requirements
+- The requirements together form the **Wallet Privacy Framework**
+- Coins are moved from one wallet to the other by mixing:
+    - Most on-chain techniques can be used for this
+    - ZeroLink has its own: **Chaumian CoinJoin**
+- Relies on Tor for anonymous communication with the mixing server
+- Implementation: Wasabi Wallet (2018)
+
+---
+
+## Wallet Privacy Framework
+
+- A bunch of requirements that have to be fulfilled to provide anonimity
+- Pre-mix wallet:
+    - Can be any bitcoin wallet
+- Post-mix wallet:
+    - Strong privacy requirements
 
 # New Method in Address Clustering
 
