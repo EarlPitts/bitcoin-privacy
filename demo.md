@@ -17,7 +17,7 @@ date:
 - Anonimity
 - Deanonimization
 - Evading deanonimization
-- TODO
+- New Approach to address clustering
 
 # Main Problems
 
