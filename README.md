@@ -199,3 +199,12 @@
     - Most on-chain techniques can be used for this
     - ZeroLink has its own: **Chaumian CoinJoin**
 - Relies on Tor for anonymous communication with the mixing server
+- Implementation: Wasabi Wallet (2018)
+
+### Wallet Privacy Framework
+
+- A bunch of requirements that have to be fulfilled to provide anonimity
+- Pre-mix wallet:
+    - Can be any bitcoin wallet
+- Post-mix wallet:
+    - Strong privacy requirements
